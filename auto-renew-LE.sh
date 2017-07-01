@@ -9,7 +9,7 @@ renew() {
     cd /srv/letsencrypt
     python acme_tiny.py --account-key "./private/domaine.$MACHINE.key" --csr "./csr/$SERVICE.csr" --acme-dir "/srv/letsencrypt/challenges/$SERVICE/" > "./certs/$SERVICE.crt.new"
     cat  "./certs/$SERVICE.crt.new" ./pem/intermediate-x3.pem > "./pem/$SERVICE.pem"
-    service apache2 reload
+    /etc/init.d/apache2 reload
     echo "Testez le service. Le résultat est-il OK ? [Y/N]"
     read OK
     if [ "$OK" = y -o "$OK" = Y ]; then
